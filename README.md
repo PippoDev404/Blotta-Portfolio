@@ -52,5 +52,3 @@ Clone o repositório e abra o `index.html` no navegador ou utilize o **Live Serv
 ## Desenvolvimento
 
 Projeto desenvolvido por **Filippo Soares Di Giuseppe**.
-
-> Portfólio desenvolvido sob demanda para o cliente Daniel Blotta.
