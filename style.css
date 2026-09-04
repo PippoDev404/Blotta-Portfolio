@@ -671,7 +671,7 @@ h2 {
 }
 
 .servicoLista li::before {
-    content: '▸';
+    content: '';
     color: var(--corAzul);
     font-size: 0.65rem;
     transition: var(--transicaoSuave);
@@ -1325,6 +1325,7 @@ footer {
     letter-spacing: 0.1em;
     color: var(--corBranco);
     transition: var(--transicaoSuave);
+    white-space: nowrap;
 }
 
 .rodapeLogo:hover {
@@ -1339,6 +1340,7 @@ footer {
     font-size: 0.75rem;
     color: var(--corSuave);
     letter-spacing: 0.08em;
+    white-space: nowrap;
 }
 
 .rodapeLinks {
@@ -1354,6 +1356,7 @@ footer {
     text-transform: uppercase;
     transition: var(--transicaoSuave);
     position: relative;
+    white-space: nowrap;
 }
 
 .rodapeLinks a::after {
@@ -1441,7 +1444,75 @@ footer {
         align-items: flex-start;
     }
 
+    /* FOOTER RESPONSIVO */
     footer {
-        padding: 0 24px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: auto;
+        min-height: 72px;
+        padding: 12px 20px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+        background: rgba(10, 10, 10, 0.98);
+        border-top: 1px solid var(--corCinza2);
+        backdrop-filter: blur(10px);
+    }
+
+    .rodapeLogo {
+        font-size: 1rem;
+        order: 1;
+    }
+
+    .rodapeLinks {
+        order: 2;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .rodapeLinks a {
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+    }
+
+    .rodapeCopy {
+        order: 3;
+        font-size: 0.65rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    body {
+        padding-bottom: 90px;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 10px 16px;
+        gap: 4px;
+    }
+
+    .rodapeLogo {
+        font-size: 0.95rem;
+    }
+
+    .rodapeLinks {
+        gap: 12px;
+    }
+
+    .rodapeLinks a {
+        font-size: 0.6rem;
+    }
+
+    .rodapeCopy {
+        font-size: 0.6rem;
+    }
+
+    body {
+        padding-bottom: 95px;
     }
 }
