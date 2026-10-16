@@ -6,17 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Blotta | Design · Foto · Vídeo</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Barlow:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
-        integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg=="
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 
 <body>
-    <div class="cursor" id="cursor" style="transform: translate(523px, 296px);"></div>
+    <div class="cursor" id="cursor"></div>
+
     <header>
         <nav>
             <a href="#" class="navLogo"><span>@blotta</span>visual</a>
@@ -29,6 +30,7 @@
             </ul>
         </nav>
     </header>
+
     <main>
         <section id="main" class="main">
             <div class="mainBgText">VISUAL</div>
@@ -58,6 +60,7 @@
                 </div>
             </div>
         </section>
+
         <div class="faixaRolante">
             <div class="faixaRolanteInterna">
                 <span>@BLOTTAVISUAL</span><span class="ponto">◆</span>
@@ -76,38 +79,14 @@
                 <span>LANDING PAGE</span><span class="ponto">◆</span>
             </div>
         </div>
+
+        <!-- SEÇÃO SOBRE (Dinâmica) -->
         <section id="sobre">
-            <div class="sobreTexto revelar visivel">
-                <div class="secaoTag">Sobre mim</div>
-                <h2>DANIEL<br>BLOTTA</h2>
-                <div class="sobreFuncoes">
-                    <span class="funcaoTag"><i class="fa-solid fa-pen-nib"></i> Designer</span>
-                    <span class="funcaoTag"><i class="fa-solid fa-camera"></i> Fotógrafo</span>
-                    <span class="funcaoTag"><i class="fa-solid fa-clapperboard"></i> Video Maker</span>
-                </div>
-                <p>Sou freelancer apaixonado por criar conteúdo visual de impacto. <strong>Design, fotografia e vídeo em
-                        um só lugar</strong> — sem precisar contratar três pessoas diferentes.</p>
-                <p>Atendimento direto comigo do início ao fim. <strong>Você fala comigo, e eu entrego.</strong></p>
-                <p>Me acompanhe no Instagram <strong>@blotta.visual</strong> para ver meu processo e projetos em
-                    andamento.</p>
-                <a href="https://instagram.com/blotta.visual" target="_blank" class="btnPrimario"
-                    style="display:inline-flex; margin-top:16px;">
-                    <i class="fa-brands fa-instagram"></i> @blotta.visual
-                </a>
-            </div>
-            <div class="revelar visivel">
-                <div class="sobreCartao">
-                    <div class="sobreCartaoTitulo">Meus<br><span>Diferenciais</span></div>
-                    <ul class="listaHabilidades">
-                        <li>Design + Foto + Vídeo <span>★★★★★</span></li>
-                        <li>Atendimento Direto <span>★★★★★</span></li>
-                        <li>Alta Conversão <span>★★★★★</span></li>
-                        <li>Entrega no Prazo <span>★★★★★</span></li>
-                        <li>Revisões Inclusas <span>★★★★★</span></li>
-                    </ul>
-                </div>
-            </div>
+            <div class="sobreTexto revelar visivel" id="sobreTextoContainer"></div>
+            <div class="revelar visivel" id="sobreCartaoContainer"></div>
         </section>
+
+        <!-- SEÇÃO SERVIÇOS (Dinâmica) -->
         <section id="servicos">
             <div class="servicosCabecalho revelar visivel">
                 <div>
@@ -115,99 +94,26 @@
                     <h2>MEUS<br>SERVIÇOS</h2>
                 </div>
             </div>
-            <div class="servicosGrade">
-                <div class="servicoCartao revelar visivel">
-                    <div class="servicoNum">01</div>
-                    <div class="servicoIcone"><i class="fa-solid fa-pen-nib"></i></div>
-                    <div class="servicoTitulo">Design</div>
-                    <p class="servicoDesc">Landing pages, social media e branding. Identidades visuais estratégicas que
-                        posicionam sua marca e convertem.</p>
-                    <ul class="servicoLista">
-                        <li>Landing pages de alta conversão</li>
-                        <li>Posts, stories e carrosséis</li>
-                        <li>Identidade visual e branding</li>
-                        <li>Design responsivo mobile + desktop</li>
-                    </ul>
-                </div>
-                <div class="servicoCartao revelar visivel">
-                    <div class="servicoNum">02</div>
-                    <div class="servicoIcone"><i class="fa-solid fa-camera"></i></div>
-                    <div class="servicoTitulo">Fotografia</div>
-                    <p class="servicoDesc">Fotos profissionais para produto, marca pessoal e redes sociais. Imagens que
-                        comunicam qualidade antes mesmo de ler uma palavra.</p>
-                    <ul class="servicoLista">
-                        <li>Fotografia de produto</li>
-                        <li>Ensaios de marca pessoal</li>
-                        <li>Fotos para redes sociais</li>
-                        <li>Edição profissional inclusa</li>
-                    </ul>
-                </div>
-                <div class="servicoCartao revelar visivel">
-                    <div class="servicoNum">03</div>
-                    <div class="servicoIcone"><i class="fa-solid fa-clapperboard"></i></div>
-                    <div class="servicoTitulo">Vídeo</div>
-                    <p class="servicoDesc">Reels, vídeos institucionais e conteúdo para redes sociais. Produção
-                        completa: gravação, edição e entrega pronta para publicar.</p>
-                    <ul class="servicoLista">
-                        <li>Reels e conteúdo para redes</li>
-                        <li>Vídeos institucionais</li>
-                        <li>Edição e motion graphics</li>
-                        <li>Formatos otimizados por plataforma</li>
-                    </ul>
-                </div>
-            </div>
+            <div class="servicosGrade" id="servicosGrade"></div>
         </section>
+
+        <!-- SEÇÃO PORTFOLIO (Dinâmica) -->
         <section id="portfolio">
             <div class="portfolioCabecalho revelar visivel">
                 <div>
                     <div class="secaoTag">Portfólio</div>
                     <h2>PROJETOS<br>RECENTES</h2>
                 </div>
-                <a href="#contato" class="btnFantasma">Quero um projeto assim</a>
+                <a href="#pacotes" class="btnFantasma">Quero um projeto assim</a>
             </div>
-            <div class="portfolioGrade">
-                <div class="portfolioItem p1 revelar visivel">
-                    <div class="portfolioFundo"></div>
-                    <div class="portfolioSobreposicao"></div>
-                    <div class="portfolioItemInterno">
-                        <div class="portfolioConteudo">
-                            <div class="portfolioCategoria">Design · Landing Page</div>
-                            <div class="portfolioTitulo">Campanha de Lançamento</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolioItem p2 revelar visivel">
-                    <div class="portfolioFundo"></div>
-                    <div class="portfolioSobreposicao"></div>
-                    <div class="portfolioItemInterno">
-                        <div class="portfolioConteudo">
-                            <div class="portfolioCategoria">Vídeo · Reels</div>
-                            <div class="portfolioTitulo">Conteúdo para Redes</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolioItem p3 revelar visivel">
-                    <div class="portfolioFundo"></div>
-                    <div class="portfolioSobreposicao"></div>
-                    <div class="portfolioItemInterno">
-                        <div class="portfolioConteudo">
-                            <div class="portfolioCategoria">Design · Branding</div>
-                            <div class="portfolioTitulo">Identidade Visual</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolioItem p4 revelar visivel">
-                    <div class="portfolioFundo"></div>
-                    <div class="portfolioSobreposicao"></div>
-                    <div class="portfolioItemInterno">
-                        <div class="portfolioConteudo">
-                            <div class="portfolioCategoria">Fotografia · Produto</div>
-                            <div class="portfolioTitulo">Ensaio de Marca</div>
-                        </div>
-                    </div>
+            <div class="portfolioCarouselContainer revelar visivel">
+                <div class="portfolioCarousel" id="portfolioCarousel">
+                    <div class="portfolioTrack" id="portfolioTrack"></div>
                 </div>
             </div>
         </section>
+
+        <!-- SEÇÃO PACOTES (Dinâmica) -->
         <section id="pacotes">
             <div class="pacotesIntro revelar visivel">
                 <div class="secaoTag">Investimento</div>
@@ -215,249 +121,36 @@
                 <p>Escolha a área que você precisa ou invista no pacote completo para empresas — design, foto e vídeo
                     juntos com um preço especial.</p>
             </div>
-
             <div class="pacotesAbas revelar visivel">
-                <button class="abaBotao" onclick="mostrarAba('abaDesign', event)"><i
+                <button class="abaBotao ativo" onclick="mostrarAba('abaDesign', event)"><i
                         class="fa-solid fa-layer-group"></i> Design</button>
                 <button class="abaBotao" onclick="mostrarAba('abaFoto', event)"><i class="fa-solid fa-camera"></i>
                     Fotografia</button>
-                <button class="abaBotao ativo" onclick="mostrarAba('abaEmpresa', event)"><i
-                        class="fa-solid fa-building"></i> Empresas</button>
+                <button class="abaBotao" onclick="mostrarAba('abaEmpresa', event)"><i class="fa-solid fa-building"></i>
+                    Empresas</button>
             </div>
-
-            <!-- DESIGN (antigo Avulsos) -->
-            <div class="pacotesGrade" id="abaDesign">
-                <div class="pacoteCartao revelar visivel" data-pacote="design-landing">
-                    <div class="pacoteIcone"><i class="fa-solid fa-display"></i></div>
-                    <div class="pacoteNome">Landing Page</div>
-                    <div class="pacotePreco">R$ 1.400 <small></small></div>
-                    <p class="pacoteDesc">Página única de alta conversão para campanhas, lançamentos ou apresentação de
-                        serviço.</p>
-                    <ul class="pacoteItens">
-                        <li><i class="fa-solid fa-check"></i> Design responsivo (mobile + desktop)</li>
-                        <li><i class="fa-solid fa-check"></i> Estrutura pensada para conversão</li>
-                        <li><i class="fa-solid fa-check"></i> Revisões inclusas</li>
-                        <li><i class="fa-solid fa-check"></i> Entrega em poucos dias</li>
-                    </ul>
-                    <a href="https://wa.me/5513997411505" class="pacoteBotao" target="_blank"><i
-                            class="fa-brands fa-whatsapp"></i> Quero esse</a>
-                </div>
-
-                <div class="pacoteCartao destaque revelar visivel" data-pacote="design-identidade">
-                    <span class="pacoteDestaqueLegenda">Mais popular</span>
-                    <div class="pacoteIcone"><i class="fa-solid fa-pen-nib"></i></div>
-                    <div class="pacoteNome">Identidade Visual</div>
-                    <div class="pacotePreco">+R$ 800 <small></small></div>
-                    <p class="pacoteDesc">Criação de identidade visual completa para posicionar sua marca com
-                        consistência.</p>
-                    <ul class="pacoteItens">
-                        <li><i class="fa-solid fa-check"></i> Logotipo profissional</li>
-                        <li><i class="fa-solid fa-check"></i> Paleta de cores e tipografia</li>
-                        <li><i class="fa-solid fa-check"></i> Manual de marca</li>
-                        <li><i class="fa-solid fa-check"></i> Aplicações e mockups</li>
-                    </ul>
-                    <a href="https://wa.me/5513997411505" class="pacoteBotao" target="_blank"><i
-                            class="fa-brands fa-whatsapp"></i> Quero esse</a>
-                </div>
-
-                <div class="pacoteCartao revelar visivel" data-pacote="design-posts">
-                    <div class="pacoteIcone"><i class="fa-solid fa-image"></i></div>
-                    <div class="pacoteNome">Posts para Redes</div>
-                    <div class="pacotePreco">R$ 250 <small></small></div>
-                    <p class="pacoteDesc">Pacote avulso com 6 posts para redes sociais, prontos para publicar.</p>
-                    <ul class="pacoteItens">
-                        <li><i class="fa-solid fa-check"></i> 6 posts personalizados</li>
-                        <li><i class="fa-solid fa-check"></i> Design alinhado à sua marca</li>
-                        <li><i class="fa-solid fa-check"></i> Formato pronto para publicar</li>
-                        <li><i class="fa-solid fa-check"></i> Entrega rápida</li>
-                    </ul>
-                    <a href="https://wa.me/5513997411505" class="pacoteBotao" target="_blank"><i
-                            class="fa-brands fa-whatsapp"></i> Quero esse</a>
-                </div>
-            </div>
-
-            <!-- FOTOGRAFIA -->
-            <div class="pacotesGrade" id="abaFoto">
-                <div class="pacoteCartao revelar" data-pacote="foto-esportiva">
-                    <div class="pacoteIcone"><i class="fa-solid fa-futbol"></i></div>
-                    <div class="pacoteNome">Esportiva</div>
-                    <div class="pacotePreco">R$ 275 <small>/partida</small></div>
-                    <p class="pacoteDesc">Cobertura fotográfica de partidas e jogos esportivos.</p>
-                    <ul class="pacoteItens">
-                        <li><i class="fa-solid fa-check"></i> Cobertura completa da partida</li>
-                        <li><i class="fa-solid fa-check"></i> Fotos editadas em alta resolução</li>
-                        <li><i class="fa-solid fa-check"></i> Entrega digital rápida</li>
-                        <li><i class="fa-solid fa-check"></i> Quanto mais jogos fechados no mês, maior o desconto no
-                            valor final</li>
-                    </ul>
-                    <a href="https://wa.me/5513997411505" class="pacoteBotao" target="_blank"><i
-                            class="fa-brands fa-whatsapp"></i> Quero esse</a>
-                </div>
-
-                <div class="pacoteCartao destaque revelar" data-pacote="foto-casamento">
-                    <span class="pacoteDestaqueLegenda">Mais popular</span>
-                    <div class="pacoteIcone"><i class="fa-solid fa-ring"></i></div>
-                    <div class="pacoteNome">Casamento</div>
-                    <div class="pacotePreco">R$ 600+ <small></small></div>
-                    <p class="pacoteDesc">Cobertura fotográfica de casamentos, com valor final de acordo com os detalhes
-                        do evento.</p>
-                    <ul class="pacoteItens">
-                        <li><i class="fa-solid fa-check"></i> A partir de R$ 600</li>
-                        <li><i class="fa-solid fa-check"></i> Valor final conforme horas e itens combinados</li>
-                        <li><i class="fa-solid fa-check"></i> Fotos editadas profissionalmente</li>
-                        <li><i class="fa-solid fa-check"></i> Entrega digital em galeria online</li>
-                    </ul>
-                    <a href="https://wa.me/5513997411505" class="pacoteBotao" target="_blank"><i
-                            class="fa-brands fa-whatsapp"></i> Quero esse</a>
-                </div>
-
-                <div class="pacoteCartao revelar" data-pacote="foto-ensaios">
-                    <div class="pacoteIcone"><i class="fa-solid fa-camera-retro"></i></div>
-                    <div class="pacoteNome">Ensaios em Geral</div>
-                    <div class="pacotePreco">Sob consulta <small></small></div>
-                    <p class="pacoteDesc">Ensaios fotográficos personalizados — família, marca pessoal, produto e
-                        outros.</p>
-                    <ul class="pacoteItens">
-                        <li><i class="fa-solid fa-check"></i> Ensaio sob medida para sua necessidade</li>
-                        <li><i class="fa-solid fa-check"></i> Local e duração combinados</li>
-                        <li><i class="fa-solid fa-check"></i> Valor definido conforme o projeto</li>
-                    </ul>
-                    <a href="https://wa.me/5513997411505" class="pacoteBotao" target="_blank"><i
-                            class="fa-brands fa-whatsapp"></i> Falar no WhatsApp</a>
-                </div>
-            </div>
-
-            <!-- EMPRESAS -->
-            <div class="pacotesGrade ativo" id="abaEmpresa">
-                <div class="pacoteCartao revelar visivel" data-pacote="empresa-essencial">
-                    <div class="pacoteIcone"><i class="fa-solid fa-briefcase"></i></div>
-                    <div class="pacoteNome">Essencial</div>
-                    <div class="pacotePreco">R$ 900 <small>/mês</small></div>
-                    <p class="pacoteDesc">Gestão de conteúdo mensal para empresas que querem começar com consistência.
-                    </p>
-                    <ul class="pacoteItens">
-                        <li><i class="fa-solid fa-check"></i> 6 Reels</li>
-                        <li><i class="fa-solid fa-check"></i> 4 Posts</li>
-                        <li><i class="fa-solid fa-check"></i> 1 Captação</li>
-                        <li><i class="fa-solid fa-check"></i> Planejamento</li>
-                        <li><i class="fa-solid fa-check"></i> Roteiros</li>
-                        <li><i class="fa-solid fa-check"></i> Edição</li>
-                        <li><i class="fa-solid fa-check"></i> Design</li>
-                        <li><i class="fa-solid fa-check"></i> Legendas</li>
-                    </ul>
-                    <a href="https://wa.me/5513997411505" class="pacoteBotao" target="_blank"><i
-                            class="fa-brands fa-whatsapp"></i> Quero esse</a>
-                </div>
-
-                <div class="pacoteCartao destaque revelar visivel" data-pacote="empresa-profissional">
-                    <span class="pacoteDestaqueLegenda">Mais popular</span>
-                    <div class="pacoteIcone"><i class="fa-solid fa-building"></i></div>
-                    <div class="pacoteNome">Profissional</div>
-                    <div class="pacotePreco">R$ 1.400 <small>/mês</small></div>
-                    <p class="pacoteDesc">Mais volume de conteúdo e estratégia para empresas em crescimento.</p>
-                    <ul class="pacoteItens">
-                        <li><i class="fa-solid fa-check"></i> 8 Reels</li>
-                        <li><i class="fa-solid fa-check"></i> 6 Posts</li>
-                        <li><i class="fa-solid fa-check"></i> 2 Captações</li>
-                        <li><i class="fa-solid fa-check"></i> Planejamento estratégico</li>
-                        <li><i class="fa-solid fa-check"></i> Stories</li>
-                        <li><i class="fa-solid fa-check"></i> Fotografia</li>
-                        <li><i class="fa-solid fa-check"></i> Relatório</li>
-                    </ul>
-                    <a href="https://wa.me/5513997411505" class="pacoteBotao" target="_blank"><i
-                            class="fa-brands fa-whatsapp"></i> Quero esse</a>
-                </div>
-
-                <div class="pacoteCartao revelar visivel" data-pacote="empresa-completo">
-                    <div class="pacoteIcone"><i class="fa-solid fa-crown"></i></div>
-                    <div class="pacoteNome">Completo</div>
-                    <div class="pacotePreco">R$ 2.000 <small>/mês</small></div>
-                    <p class="pacoteDesc">Gestão completa de conteúdo para empresas que querem dominar as redes.</p>
-                    <ul class="pacoteItens">
-                        <li><i class="fa-solid fa-check"></i> 12 Reels</li>
-                        <li><i class="fa-solid fa-check"></i> 8 Posts</li>
-                        <li><i class="fa-solid fa-check"></i> 3 Captações</li>
-                        <li><i class="fa-solid fa-check"></i> Gestão completa</li>
-                        <li><i class="fa-solid fa-check"></i> Publicação</li>
-                        <li><i class="fa-solid fa-check"></i> Stories</li>
-                        <li><i class="fa-solid fa-check"></i> Fotografia</li>
-                        <li><i class="fa-solid fa-check"></i> Relatório</li>
-                    </ul>
-                    <a href="https://wa.me/5513997411505" class="pacoteBotao" target="_blank"><i
-                            class="fa-brands fa-whatsapp"></i> Quero esse</a>
-                </div>
-            </div>
-
+            <div class="pacotesGrade ativo" id="abaDesign"></div>
+            <div class="pacotesGrade" id="abaFoto"></div>
+            <div class="pacotesGrade" id="abaEmpresa"></div>
             <p class="pacoteAviso revelar visivel">Valores de Design, Fotografia e Vídeo avulsos: <strong>em
                     breve.</strong> Entre em contato para uma proposta personalizada.</p>
         </section>
+
+        <!-- SEÇÃO DEPOIMENTOS (Dinâmica) -->
         <section id="depoimentos">
             <div class="secaoTag revelar visivel">Clientes</div>
             <h2 class="revelar visivel">O QUE DIZEM<br>SOBRE MIM</h2>
-            <div class="depoimentosGrade">
-                <div class="depoimentoCartao revelar visivel">
-                    <div class="depoimentoEstrelas">★★★★★</div>
-                    <p class="depoimentoTexto">"O Daniel transformou minha presença online. A landing page entregue
-                        superou
-                        todas as expectativas e minha taxa de conversão dobrou!"</p>
-                    <div class="depoimentoAutor">
-                        <div class="depoimentoAvatar">AN</div>
-                        <div>
-                            <div class="depoimentoNome">Ana Ribeiro</div>
-                            <div class="depoimentoFuncao">Coach de Carreira</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="depoimentoCartao revelar visivel">
-                    <div class="depoimentoEstrelas">★★★★★</div>
-                    <p class="depoimentoTexto">"Profissionalismo impecável. O feed do meu Instagram ficou incrível e meu
-                        engajamento cresceu muito. Recomendo demais o trabalho do Daniel!"</p>
-                    <div class="depoimentoAutor">
-                        <div class="depoimentoAvatar">MF</div>
-                        <div>
-                            <div class="depoimentoNome">Marcos Ferreira</div>
-                            <div class="depoimentoFuncao">Empreendedor Digital</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="depoimentoCartao revelar visivel">
-                    <div class="depoimentoEstrelas">★★★★★</div>
-                    <p class="depoimentoTexto">"Desde que contratei o Daniel para o meu branding, minha marca ganhou
-                        muito mais
-                        credibilidade. Atendimento rápido e entrega perfeita."</p>
-                    <div class="depoimentoAutor">
-                        <div class="depoimentoAvatar">JL</div>
-                        <div>
-                            <div class="depoimentoNome">Juliana Lima</div>
-                            <div class="depoimentoFuncao">Consultora de Moda</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="depoimentosGrade" id="depoimentosGrade"></div>
         </section>
+
+        <!-- SEÇÃO CONTATO (Dinâmica) -->
         <section id="contato">
-            <div class="contatoTexto revelar visivel">
-                <div class="secaoTag">Contato</div>
-                <h2>VAMOS CRIAR<br>ALGO INCRÍVEL?</h2>
-                <p>Me manda uma mensagem no WhatsApp ou me segue no Instagram <strong
-                        style="color:var(--corBranco)">@blotta.visual</strong>. Respondo rápido e sem enrolação!</p>
-                <ul class="contatoInfo">
-                    <li><span class="icone"><i class="fa-solid fa-location-dot"></i></span> Brasil · Atendimento online
-                    </li>
-                    <li><span class="icone"><i class="fa-brands fa-instagram"></i></span> Instagram: @blotta.visual</li>
-                    <li><span class="icone"><i class="fa-solid fa-bolt"></i></span> Resposta em até 2 horas</li>
-                </ul>
-            </div>
-            <div class="contatoAcao revelar visivel">
-                <a href="https://wa.me/5513997411505" class="whatsappBotao" target="_blank">
-                    <i class="fa-brands fa-whatsapp wIcone"></i>
-                    FALAR AGORA
-                    <small>Via WhatsApp</small>
-                </a>
-            </div>
+            <div class="contatoTexto revelar visivel" id="contatoTextoContainer"></div>
+            <div class="contatoAcao revelar visivel" id="contatoAcaoContainer"></div>
         </section>
     </main>
-    <footer id="rodape" style="position: fixed;">
+
+    <footer id="rodape">
         <div class="rodapeLogo">Daniel <span>Blotta</span> · @blotta.visual</div>
         <div class="rodapeCopy">© 2026 Daniel Blotta. Todos os direitos reservados.</div>
         <div class="rodapeLinks">
@@ -466,6 +159,42 @@
             <a href="https://instagram.com/blotta.visual" target="_blank">Instagram</a>
         </div>
     </footer>
+
+    <!-- MODAL DO PORTFOLIO COM GALERIA -->
+    <div class="portfolioModal" id="portfolioModal">
+        <div class="portfolioModalOverlay" id="portfolioModalOverlay"></div>
+        <div class="portfolioModalContent">
+            <button class="portfolioModalClose" id="portfolioModalClose" aria-label="Fechar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Galeria de Imagens -->
+            <div class="portfolioModalGallery">
+                <button class="galleryNav prev" id="galleryPrev" aria-label="Foto anterior">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <div class="galleryContainer" id="galleryContainer">
+                    <!-- As imagens serão inseridas via JS -->
+                </div>
+
+                <button class="galleryNav next" id="galleryNext" aria-label="Próxima foto">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <div class="galleryCounter" id="galleryCounter">1 / 1</div>
+            </div>
+
+            <div class="portfolioModalInfo">
+                <div class="portfolioModalCategoria" id="modalCategoria"></div>
+                <h3 class="portfolioModalTitulo" id="modalTitulo"></h3>
+                <p class="portfolioModalDescricao" id="modalDescricao"></p>
+                <a href="#pacotes" class="btnPrimario portfolioModalBtn" id="modalBtn">
+                    <i class="fa-solid fa-briefcase"></i> Quero um projeto assim
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo | @blotta.visual</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <!-- LOGIN -->
+    <div class="loginScreen" id="loginScreen">
+        <div class="loginBox">
+            <h1><span>@blotta</span>visual</h1>
+            <p>Painel Administrativo</p>
+            <input type="email" id="emailInput" placeholder="Email" autocomplete="off">
+            <input type="password" id="senhaInput" placeholder="Senha" autocomplete="off">
+            <button onclick="window.fazerLogin()" id="btnLogin">
+                <i class="fa-solid fa-right-to-bracket"></i> Entrar
+            </button>
+            <p class="loginErro" id="loginErro"></p>
+        </div>
+    </div>
+
+    <!-- PAINEL -->
+    <div class="adminPanel" id="adminPanel" style="display: none;">
+        <header class="adminHeader">
+            <div class="adminLogo">
+                <span>@blotta</span>visual
+                <small><i class="fa-solid fa-shield-halved"></i> Admin</small>
+            </div>
+            <div class="adminUserInfo">
+                <span id="userEmail"><i class="fa-solid fa-user"></i> </span>
+                <button class="btnSair" onclick="window.fazerLogout()">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sair
+                </button>
+            </div>
+        </header>
+
+        <div class="adminTabs">
+            <button class="adminTab ativo" onclick="window.mostrarAbaAdmin('sobre', event)">
+                <i class="fa-solid fa-user"></i> Sobre
+            </button>
+            <button class="adminTab" onclick="window.mostrarAbaAdmin('servicos', event)">
+                <i class="fa-solid fa-briefcase"></i> Serviços
+            </button>
+            <button class="adminTab" onclick="window.mostrarAbaAdmin('projetos', event)">
+                <i class="fa-solid fa-images"></i> Projetos
+            </button>
+            <button class="adminTab" onclick="window.mostrarAbaAdmin('pacotes', event)">
+                <i class="fa-solid fa-box"></i> Pacotes
+            </button>
+            <button class="adminTab" onclick="window.mostrarAbaAdmin('depoimentos', event)">
+                <i class="fa-solid fa-quote-left"></i> Depoimentos
+            </button>
+            <button class="adminTab" onclick="window.mostrarAbaAdmin('contato', event)">
+                <i class="fa-solid fa-phone"></i> Contato
+            </button>
+        </div>
+
+        <!-- ABA SOBRE -->
+        <div class="adminAba" id="abaSobre">
+            <div class="adminSecao">
+                <h2><i class="fa-solid fa-user"></i> Seção Sobre Mim</h2>
+                <form id="formSobre" onsubmit="window.salvarSobre(event)">
+                    <input type="hidden" id="sobreId">
+                    <div class="formGrupo">
+                        <label><i class="fa-solid fa-paragraph"></i> Texto Principal</label>
+                        <textarea id="sobreTexto1" rows="3" required autocomplete="off"></textarea>
+                    </div>
+                    <div class="formGrupo">
+                        <label><i class="fa-solid fa-align-left"></i> Texto Secundário</label>
+                        <textarea id="sobreTexto2" rows="2" required autocomplete="off"></textarea>
+                    </div>
+                    <div class="formGrupo">
+                        <label><i class="fa-brands fa-instagram"></i> Instagram</label>
+                        <input type="text" id="sobreInstagram" required autocomplete="off">
+                    </div>
+                    <div class="formAcoes">
+                        <button type="submit" class="btnSalvar">
+                            <i class="fa-solid fa-floppy-disk"></i> Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ABA SERVIÇOS -->
+        <div class="adminAba" id="abaServicos" style="display: none;">
+            <div class="adminSecao">
+                <h2><i class="fa-solid fa-plus-circle"></i> <span id="tituloFormServico">Adicionar Serviço</span></h2>
+                <form id="formServico" onsubmit="window.salvarServico(event)">
+                    <input type="hidden" id="servicoId">
+                    <div class="formGrid">
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-hashtag"></i> Número</label>
+                            <input type="text" id="servicoNumero" placeholder="01" readonly
+                                style="background: #f5f5f5; cursor: not-allowed;">
+                        </div>
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-heading"></i> Título</label>
+                            <input type="text" id="servicoTitulo" placeholder="Ex: Design" required autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="formGrupo">
+                        <label><i class="fa-solid fa-align-left"></i> Descrição</label>
+                        <textarea id="servicoDescricao" rows="2" placeholder="Descrição do serviço..." required
+                            autocomplete="off"></textarea>
+                    </div>
+                    <div class="formGrupo">
+                        <label><i class="fa-solid fa-icons"></i> Ícone Font Awesome</label>
+                        <input type="hidden" id="servicoIcone" value="fa-solid fa-pen-nib">
+                        <div class="customIconDropdown" id="iconDropdown">
+                            <div class="customIconTrigger" id="iconTrigger">
+                                <div class="iconPreviewBox"><i class="fa-solid fa-pen-nib" id="selectedIconDisplay"></i>
+                                </div>
+                                <span class="iconName" id="selectedIconName">Caneta (pen-nib)</span>
+                                <i class="fa-solid fa-chevron-down dropdownArrow"></i>
+                            </div>
+                            <div class="customIconList" id="iconList">
+                                <div class="customIconOption" data-value="fa-solid fa-pen-nib"
+                                    data-name="Caneta (pen-nib)"><i class="fa-solid fa-pen-nib"></i><span>Caneta
+                                        (pen-nib)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-palette"
+                                    data-name="Paleta (palette)"><i class="fa-solid fa-palette"></i><span>Paleta
+                                        (palette)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-paintbrush"
+                                    data-name="Pincel (paintbrush)"><i class="fa-solid fa-paintbrush"></i><span>Pincel
+                                        (paintbrush)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-pen" data-name="Caneta (pen)"><i
+                                        class="fa-solid fa-pen"></i><span>Caneta (pen)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-pencil"
+                                    data-name="Lápis (pencil)"><i class="fa-solid fa-pencil"></i><span>Lápis
+                                        (pencil)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-bezier-curve"
+                                    data-name="Curva (bezier-curve)"><i class="fa-solid fa-bezier-curve"></i><span>Curva
+                                        (bezier-curve)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-layer-group"
+                                    data-name="Camadas (layer-group)"><i
+                                        class="fa-solid fa-layer-group"></i><span>Camadas (layer-group)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-shapes"
+                                    data-name="Formas (shapes)"><i class="fa-solid fa-shapes"></i><span>Formas
+                                        (shapes)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-vector-square"
+                                    data-name="Vetor (vector-square)"><i
+                                        class="fa-solid fa-vector-square"></i><span>Vetor (vector-square)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-object-group"
+                                    data-name="Agrupar (object-group)"><i
+                                        class="fa-solid fa-object-group"></i><span>Agrupar (object-group)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-crop" data-name="Cortar (crop)"><i
+                                        class="fa-solid fa-crop"></i><span>Cortar (crop)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-wand-magic-sparkles"
+                                    data-name="Mágica (wand-magic-sparkles)"><i
+                                        class="fa-solid fa-wand-magic-sparkles"></i><span>Mágica
+                                        (wand-magic-sparkles)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-swatchbook"
+                                    data-name="Amostras (swatchbook)"><i
+                                        class="fa-solid fa-swatchbook"></i><span>Amostras (swatchbook)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-font" data-name="Fonte (font)"><i
+                                        class="fa-solid fa-font"></i><span>Fonte (font)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-icons" data-name="Ícones (icons)">
+                                    <i class="fa-solid fa-icons"></i><span>Ícones (icons)</span>
+                                </div>
+                                <div class="customIconOption" data-value="fa-solid fa-image" data-name="Imagem (image)">
+                                    <i class="fa-solid fa-image"></i><span>Imagem (image)</span>
+                                </div>
+                                <div class="customIconOption" data-value="fa-solid fa-photo-film"
+                                    data-name="Foto/Filme (photo-film)"><i
+                                        class="fa-solid fa-photo-film"></i><span>Foto/Filme (photo-film)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-video" data-name="Vídeo (video)">
+                                    <i class="fa-solid fa-video"></i><span>Vídeo (video)</span>
+                                </div>
+                                <div class="customIconOption" data-value="fa-solid fa-film" data-name="Filme (film)"><i
+                                        class="fa-solid fa-film"></i><span>Filme (film)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-camera"
+                                    data-name="Câmera (camera)"><i class="fa-solid fa-camera"></i><span>Câmera
+                                        (camera)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-camera-retro"
+                                    data-name="Câmera Retro (camera-retro)"><i
+                                        class="fa-solid fa-camera-retro"></i><span>Câmera Retro (camera-retro)</span>
+                                </div>
+                                <div class="customIconOption" data-value="fa-solid fa-print"
+                                    data-name="Imprimir (print)"><i class="fa-solid fa-print"></i><span>Imprimir
+                                        (print)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-laptop"
+                                    data-name="Laptop (laptop)"><i class="fa-solid fa-laptop"></i><span>Laptop
+                                        (laptop)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-desktop"
+                                    data-name="Desktop (desktop)"><i class="fa-solid fa-desktop"></i><span>Desktop
+                                        (desktop)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-mobile-screen"
+                                    data-name="Celular (mobile-screen)"><i
+                                        class="fa-solid fa-mobile-screen"></i><span>Celular (mobile-screen)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-droplet"
+                                    data-name="Gota/Cor (droplet)"><i class="fa-solid fa-droplet"></i><span>Gota/Cor
+                                        (droplet)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-fill-drip"
+                                    data-name="Preencher (fill-drip)"><i
+                                        class="fa-solid fa-fill-drip"></i><span>Preencher (fill-drip)</span></div>
+                                <div class="customIconOption" data-value="fa-solid fa-border-all"
+                                    data-name="Bordas (border-all)"><i class="fa-solid fa-border-all"></i><span>Bordas
+                                        (border-all)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="formGrupo">
+                        <label><i class="fa-solid fa-list-check"></i> Itens do Serviço</label>
+                        <div class="itensContainer">
+                            <div class="itensInputWrapper">
+                                <input type="text" id="novoItemInput"
+                                    placeholder="Digite um item e clique em adicionar..." autocomplete="off">
+                                <button type="button" class="btnAdicionarItem" onclick="window.adicionarItem()">
+                                    <i class="fa-solid fa-plus"></i> Adicionar
+                                </button>
+                            </div>
+                            <ul id="listaItensServico" class="listaItensDinamicos"></ul>
+                        </div>
+                    </div>
+                    <div class="formAcoes">
+                        <button type="submit" class="btnSalvar"><i class="fa-solid fa-floppy-disk"></i> Salvar
+                            Serviço</button>
+                        <button type="button" class="btnCancelar" onclick="window.limparFormServico()"><i
+                                class="fa-solid fa-eraser"></i> Limpar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="adminSecao">
+                <h2><i class="fa-solid fa-list-ul"></i> Serviços Existentes (<span id="countServicos">0</span>/3)</h2>
+                <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 16px;"><i
+                        class="fa-solid fa-info-circle"></i> Máximo de 3 serviços permitidos</p>
+                <div class="listaItens" id="listaServicos"></div>
+            </div>
+        </div>
+
+        <!-- ABA PROJETOS -->
+        <div class="adminAba" id="abaProjetos" style="display: none;">
+            <div class="adminSecao">
+                <h2><i class="fa-solid fa-plus-circle"></i> <span id="tituloFormProjeto">Adicionar Projeto</span></h2>
+                <form id="formProjeto" onsubmit="window.salvarProjeto(event)">
+                    <input type="hidden" id="projetoId">
+                    <div class="formGrid">
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-tag"></i> Categoria</label>
+                            <input type="text" id="projetoCategoria" placeholder="Design · Landing Page" required
+                                autocomplete="off">
+                        </div>
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-heading"></i> Título</label>
+                            <input type="text" id="projetoTitulo" placeholder="Campanha de Lançamento" required
+                                autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="formGrupo">
+                        <label><i class="fa-solid fa-align-left"></i> Descrição</label>
+                        <textarea id="projetoDescricao" rows="3" required autocomplete="off"></textarea>
+                    </div>
+
+                    <!-- IMAGEM DE CAPA -->
+                    <div class="formGrupo">
+                        <label><i class="fa-solid fa-image"></i> Imagem de Capa (obrigatória)</label>
+                        <div class="imageDropZone" id="capaDropZone">
+                            <div class="imageDropContent" id="capaDropContent">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <p><strong>Arraste uma imagem aqui</strong> ou clique para selecionar</p>
+                                <small>PNG, JPG ou WEBP (máx. 5MB)</small>
+                            </div>
+                            <div class="imagePreview" id="capaPreview" style="display: none;">
+                                <img id="capaPreviewImg" src="" alt="Preview">
+                                <button type="button" class="btnRemoveImage" onclick="window.removerCapaProjeto()"
+                                    title="Remover imagem"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                            <input type="file" id="projetoCapaFile" accept="image/*" style="display: none;">
+                            <input type="hidden" id="projetoCapa">
+                        </div>
+                    </div>
+
+                    <!-- IMAGENS ADICIONAIS -->
+                    <div class="formGrupo">
+                        <label><i class="fa-solid fa-images"></i> Imagens do Projeto (opcional - múltiplas)</label>
+                        <div class="imageDropZone" id="imagensDropZone">
+                            <div class="imageDropContent" id="imagensDropContent">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <p><strong>Arraste imagens aqui</strong> ou clique para selecionar</p>
+                                <small>PNG, JPG ou WEBP (máx. 5MB cada)</small>
+                            </div>
+                            <div class="imagensPreviewGrid" id="imagensPreviewGrid" style="display: none;">
+                                <!-- Imagens serão adicionadas aqui dinamicamente -->
+                            </div>
+                            <input type="file" id="projetoImagensFile" accept="image/*" multiple style="display: none;">
+                            <input type="hidden" id="projetoImagens">
+                        </div>
+                    </div>
+
+                    <div class="formAcoes">
+                        <button type="submit" class="btnSalvar"><i class="fa-solid fa-floppy-disk"></i> Salvar
+                            Projeto</button>
+                        <button type="button" class="btnCancelar" onclick="window.limparFormProjeto()"><i
+                                class="fa-solid fa-eraser"></i> Limpar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="adminSecao">
+                <h2><i class="fa-solid fa-list-ul"></i> Projetos Existentes</h2>
+                <div class="listaItens" id="listaProjetos"></div>
+            </div>
+        </div>
+
+        <!-- ABA PACOTES -->
+        <div class="adminAba" id="abaPacotes" style="display: none;">
+            <div class="adminSecao">
+                <h2><i class="fa-solid fa-plus-circle"></i> <span id="tituloFormPacote">Adicionar Pacote</span></h2>
+                <form id="formPacote" onsubmit="window.salvarPacote(event)">
+                    <input type="hidden" id="pacoteId">
+                    <div class="formGrid">
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-tag"></i> Categoria</label>
+                            <select id="pacoteCategoria" required onchange="window.verificarDestaquePacote()">
+                                <option value="design">Design</option>
+                                <option value="foto">Fotografia</option>
+                                <option value="empresa">Empresas</option>
+                            </select>
+                        </div>
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-heading"></i> Nome</label>
+                            <input type="text" id="pacoteNome" placeholder="Landing Page" required autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="formGrid">
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-dollar-sign"></i> Preço</label>
+                            <input type="text" id="pacotePreco" placeholder="R$ 1.400" required autocomplete="off">
+                        </div>
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-calendar"></i> Período</label>
+                            <input type="text" id="pacotePeriodo" placeholder="/mês" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="formGrupo">
+                        <label><i class="fa-solid fa-align-left"></i> Descrição</label>
+                        <textarea id="pacoteDescricao" rows="2" required autocomplete="off"></textarea>
+                    </div>
+                    <div class="formGrupo">
+                        <label><i class="fa-solid fa-list-check"></i> Itens do Pacote</label>
+                        <div class="itensContainer">
+                            <div class="itensInputWrapper">
+                                <input type="text" id="novoItemPacoteInput"
+                                    placeholder="Digite um item e clique em adicionar..." autocomplete="off">
+                                <button type="button" class="btnAdicionarItem" onclick="window.adicionarItemPacote()">
+                                    <i class="fa-solid fa-plus"></i> Adicionar
+                                </button>
+                            </div>
+                            <ul id="listaItensPacote" class="listaItensDinamicos"></ul>
+                        </div>
+                    </div>
+                    <div class="formGrid">
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-icons"></i> Ícone Font Awesome</label>
+                            <input type="hidden" id="pacoteIcone" value="fa-solid fa-box">
+                            <div class="customIconDropdown" id="pacoteIconDropdown">
+                                <div class="customIconTrigger" id="pacoteIconTrigger">
+                                    <div class="iconPreviewBox"><i class="fa-solid fa-box"
+                                            id="pacoteSelectedIconDisplay"></i></div>
+                                    <span class="iconName" id="pacoteSelectedIconName">Caixa (box)</span>
+                                    <i class="fa-solid fa-chevron-down dropdownArrow"></i>
+                                </div>
+                                <div class="customIconList" id="pacoteIconList">
+                                    <div class="customIconOption" data-value="fa-solid fa-box" data-name="Caixa (box)">
+                                        <i class="fa-solid fa-box"></i><span>Caixa (box)</span>
+                                    </div>
+                                    <div class="customIconOption" data-value="fa-solid fa-pen-nib"
+                                        data-name="Caneta (pen-nib)"><i class="fa-solid fa-pen-nib"></i><span>Caneta
+                                            (pen-nib)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-palette"
+                                        data-name="Paleta (palette)"><i class="fa-solid fa-palette"></i><span>Paleta
+                                            (palette)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-paintbrush"
+                                        data-name="Pincel (paintbrush)"><i
+                                            class="fa-solid fa-paintbrush"></i><span>Pincel (paintbrush)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-camera"
+                                        data-name="Câmera (camera)"><i class="fa-solid fa-camera"></i><span>Câmera
+                                            (camera)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-video"
+                                        data-name="Vídeo (video)"><i class="fa-solid fa-video"></i><span>Vídeo
+                                            (video)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-laptop"
+                                        data-name="Laptop (laptop)"><i class="fa-solid fa-laptop"></i><span>Laptop
+                                            (laptop)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-mobile-screen"
+                                        data-name="Celular (mobile-screen)"><i
+                                            class="fa-solid fa-mobile-screen"></i><span>Celular (mobile-screen)</span>
+                                    </div>
+                                    <div class="customIconOption" data-value="fa-solid fa-bullhorn"
+                                        data-name="Marketing (bullhorn)"><i
+                                            class="fa-solid fa-bullhorn"></i><span>Marketing (bullhorn)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-chart-line"
+                                        data-name="Analytics (chart-line)"><i
+                                            class="fa-solid fa-chart-line"></i><span>Analytics (chart-line)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-rocket"
+                                        data-name="Lançamento (rocket)"><i
+                                            class="fa-solid fa-rocket"></i><span>Lançamento (rocket)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-star"
+                                        data-name="Estrela (star)"><i class="fa-solid fa-star"></i><span>Estrela
+                                            (star)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-crown"
+                                        data-name="Coroa (crown)"><i class="fa-solid fa-crown"></i><span>Coroa
+                                            (crown)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-gem"
+                                        data-name="Diamante (gem)"><i class="fa-solid fa-gem"></i><span>Diamante
+                                            (gem)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-briefcase"
+                                        data-name="Maleta (briefcase)"><i class="fa-solid fa-briefcase"></i><span>Maleta
+                                            (briefcase)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-building"
+                                        data-name="Prédio (building)"><i class="fa-solid fa-building"></i><span>Prédio
+                                            (building)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-users"
+                                        data-name="Usuários (users)"><i class="fa-solid fa-users"></i><span>Usuários
+                                            (users)</span></div>
+                                    <div class="customIconOption" data-value="fa-solid fa-handshake"
+                                        data-name="Parceria (handshake)"><i
+                                            class="fa-solid fa-handshake"></i><span>Parceria (handshake)</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formGrupo checkbox">
+                            <label><input type="checkbox" id="pacoteDestaque"
+                                    onchange="window.verificarDestaquePacote()"> <i class="fa-solid fa-star"
+                                    style="color: #f59e0b;"></i> Mais Popular</label>
+                            <small id="destaqueAviso"
+                                style="color: var(--corVermelho); font-size: 0.8rem; margin-top: 4px; display: none;"></small>
+                        </div>
+                    </div>
+                    <div class="formAcoes">
+                        <button type="submit" class="btnSalvar"><i class="fa-solid fa-floppy-disk"></i> Salvar
+                            Pacote</button>
+                        <button type="button" class="btnCancelar" onclick="window.limparFormPacote()"><i
+                                class="fa-solid fa-eraser"></i> Limpar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="adminSecao">
+                <h2><i class="fa-solid fa-list-ul"></i> Pacotes Existentes</h2>
+                <div id="listaPacotes"></div>
+            </div>
+        </div>
+
+        <!-- ABA DEPOIMENTOS -->
+        <div class="adminAba" id="abaDepoimentos" style="display: none;">
+            <div class="adminSecao">
+                <h2><i class="fa-solid fa-plus-circle"></i> <span id="tituloFormDepoimento">Adicionar Depoimento</span>
+                </h2>
+                <form id="formDepoimento" onsubmit="window.salvarDepoimento(event)">
+                    <input type="hidden" id="depoimentoId">
+                    <div class="formGrid">
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-user"></i> Nome</label>
+                            <input type="text" id="depoimentoNome" placeholder="Ex: João Silva" required
+                                autocomplete="off">
+                        </div>
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-briefcase"></i> Função/Cargo</label>
+                            <input type="text" id="depoimentoFuncao" placeholder="Ex: CEO da Empresa X" required
+                                autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="formGrupo">
+                        <label><i class="fa-solid fa-quote-left"></i> Texto do Depoimento</label>
+                        <textarea id="depoimentoTexto" rows="3" placeholder="Escreva o depoimento do cliente..."
+                            required autocomplete="off"></textarea>
+                    </div>
+                    <div class="formGrid">
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-font"></i> Iniciais (2 letras)</label>
+                            <input type="text" id="depoimentoIniciais" maxlength="2" placeholder="JS" required
+                                autocomplete="off" style="text-transform: uppercase;">
+                        </div>
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-star"></i> Estrelas (1-5)</label>
+                            <div class="estrelasSelector" id="estrelasSelector">
+                                <i class="fa-regular fa-star" data-valor="1"></i>
+                                <i class="fa-regular fa-star" data-valor="2"></i>
+                                <i class="fa-regular fa-star" data-valor="3"></i>
+                                <i class="fa-regular fa-star" data-valor="4"></i>
+                                <i class="fa-regular fa-star" data-valor="5"></i>
+                            </div>
+                            <input type="hidden" id="depoimentoEstrelas" value="5">
+                        </div>
+                    </div>
+                    <div class="formAcoes">
+                        <button type="submit" class="btnSalvar"><i class="fa-solid fa-floppy-disk"></i> Salvar
+                            Depoimento</button>
+                        <button type="button" class="btnCancelar" onclick="window.limparFormDepoimento()"><i
+                                class="fa-solid fa-eraser"></i> Limpar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="adminSecao">
+                <h2><i class="fa-solid fa-list-ul"></i> Depoimentos Existentes (<span id="countDepoimentos">0</span>/3)
+                </h2>
+                <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 16px;"><i
+                        class="fa-solid fa-info-circle"></i> Máximo de 3 depoimentos permitidos</p>
+                <div class="listaItens" id="listaDepoimentos"></div>
+            </div>
+        </div>
+
+        <!-- ABA CONTATO -->
+        <div class="adminAba" id="abaContato" style="display: none;">
+            <div class="adminSecao">
+                <h2><i class="fa-solid fa-address-card"></i> Informações de Contato</h2>
+                <form id="formContato" onsubmit="window.salvarContato(event)">
+                    <input type="hidden" id="contatoId">
+                    <div class="formGrid">
+                        <div class="formGrupo">
+                            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp (só números)</label>
+                            <input type="text" id="contatoWhatsapp" placeholder="5513997411505" required
+                                autocomplete="off">
+                        </div>
+                        <div class="formGrupo">
+                            <label><i class="fa-brands fa-instagram"></i> Instagram</label>
+                            <input type="text" id="contatoInstagram" placeholder="@blotta.visual" required
+                                autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="formGrid">
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-location-dot"></i> Localização</label>
+                            <input type="text" id="contatoLocalizacao" placeholder="Brasil · Atendimento online"
+                                required autocomplete="off">
+                        </div>
+                        <div class="formGrupo">
+                            <label><i class="fa-solid fa-clock"></i> Tempo de Resposta</label>
+                            <input type="text" id="contatoTempo" placeholder="Resposta em até 2 horas" required
+                                autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="formAcoes">
+                        <button type="submit" class="btnSalvar"><i class="fa-solid fa-floppy-disk"></i> Salvar
+                            Contato</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://jgwecehhfsxdiaxeiizk.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impnd2VjZWhoZnN4ZGlheGVpaXprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIwNzI4OTMsImV4cCI6MjEwNzY0ODg5M30.sM-krIWilWTqlRYa01dpvmKXAHg2WGZJKTqgYEjjEXs';
+        window.supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
+    <script src="admin.js"></script>
+</body>
+
+</html>
